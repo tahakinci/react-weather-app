@@ -1,6 +1,8 @@
-import { defineConfig } from 'vite';
+// vite.config.js
+
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
+import { defineConfig } from 'vite';
 
 export default defineConfig(({ mode }) => {
     // Load and parse the .env file
@@ -16,5 +18,8 @@ export default defineConfig(({ mode }) => {
         plugins: [react()],
         root: 'src',
         define: exposedEnv,
+        build: {
+            outDir: 'dist', // specify the output directory for the built assets
+        },
     };
 });
