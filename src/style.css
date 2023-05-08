@@ -144,7 +144,7 @@
 
   .main-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr;
     grid-template-rows: 4fr 5fr;
     height: 75vh;
     
@@ -226,8 +226,51 @@
     max-width: var(--size-700);
   }
 
+  /* chart section */
 
+  .chart-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 8fr;
+  }
 
+  .chart {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+  }
+
+  .chartY {
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    gap: 0.5rem;
+    align-items: flex-end;
+  }
+
+  .chartX {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: var(--fs-300);
+    height: 20%;
+    gap: 0.5rem;
+  }
+
+  .chart-bar {
+   height: 100%;
+   width: 10px;
+   flex-grow: 1;
+   background-color: var(--clr-primary-400-dm);
+  }
+
+  .rain-bar { 
+    width: 100%;
+    background-color: var(--clr-secondary-300-dm);
+  }
+
+  
 
 
   
@@ -338,5 +381,3 @@
   .weather-section {
     background-color: yellow;
   } */
-
- 

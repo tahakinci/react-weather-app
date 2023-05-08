@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TodayForecast from "./TodayForecast";
 import WeeklyForecast from "./WeeklyForecast";
+import Charts from "./Charts";
 
 const iconObj = {
   "01d": "./icons/clear sky.png",
@@ -107,6 +108,7 @@ const WeatherTab = ({ cityData, weatherData = [] }) => {
       </section>
       <section className="chart-section">
         <h3>Chance of rain</h3>
+        <Charts today={today} />
       </section>
       <section className="map-section">
         <h3>Global map</h3>
