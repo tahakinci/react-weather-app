@@ -1,37 +1,49 @@
-const Navigation = ({ setSearch, handleSubmit }) => {
+const Navigation = ({ setSearch, handleSubmit, city }) => {
   return (
     <nav className="navigation">
-      <div className="nav-wrapper">
-        <div>
-          <button>Mode</button>
+      <div>
+        <div className="inline padding-right-500">
+          <button className="button">
+            <i className="fa-solid fa-desktop"></i>
+          </button>
         </div>
-        <div>
-          <i></i>
-          <p>
-            <span>City</span>, Country
-          </p>
-        </div>
+
+        {city ? (
+          <div className="inline">
+            <i className="fa-solid fa-location-dot inline"></i>
+
+            <p className="inline padding-left-200">
+              {city.country}, {city.name}
+            </p>
+          </div>
+        ) : null}
       </div>
 
-      <div>
+      <div className="input-box">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
           }}
         >
+          <button className="button">
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
           <input
             name="country"
-            placeholder="Please enter the country"
+            placeholder="Search city..."
             onChange={(e) => setSearch(e.target.value)}
             className="input-box"
           />
-          <button className="input-box">Submit</button>
         </form>
       </div>
-      <div className="nav-wrapper">
-        <button className="nav-button">Dark</button>
-        <button className="nav-button">Lang</button>
+      <div className="mode-box">
+        <button className="button">
+          <i className="fa-solid fa-moon"></i>
+        </button>
+        <button className="button">
+          <i className="fa-regular fa-sun"></i>
+        </button>
       </div>
     </nav>
   );
