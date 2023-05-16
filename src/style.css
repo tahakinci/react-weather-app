@@ -151,7 +151,7 @@
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 4fr 5fr;
-    height: 75vh;
+    max-height: 75vh;
     overflow: hidden;
     
   }

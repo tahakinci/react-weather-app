@@ -12,10 +12,10 @@ const WeeklyForecast = ({ data, icon }) => {
   return (
     <div className="forecast-screen-sm bg-primary-400-dm">
       <div className="fw-regular">
-        {dayObj[new Date(data[4].dt_txt).getDay()]}
+        {dayObj[new Date(data[0].dt_txt).getDay()]}
       </div>
       <img src={icon} />
-      <div>{Math.round(data[4].main.temp)} °C</div>
+      <div>{Math.round(data[0].main.temp)} °C</div>
     </div>
   );
 };

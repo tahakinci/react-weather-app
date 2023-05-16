@@ -8,7 +8,7 @@ const SearchParams = () => {
   const [cities, setCities] = useState([]);
   const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
-  const apiKey = "2lsiKA7NMU1TTWqs9aO3tA==Pev5wchL6jPAMHhX";
+  const CITIES_API_KEY = import.meta.env.REACT_API_KEY_CITIES;
   let apiUrl = `https://api.api-ninjas.com/v1/city?country=${weatherData?.city?.country}&limit=5`;
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const SearchParams = () => {
       const res = await fetch(apiUrl, {
         method: "GET",
         headers: {
-          "X-Api-Key": apiKey,
+          "X-Api-Key": CITIES_API_KEY,
         },
       });
       if (!res.ok) {
