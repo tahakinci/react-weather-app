@@ -64,6 +64,7 @@ const SearchParams = () => {
           otherCitiesData={cities}
         />
       ) : null}
+      <SearchButton setSearch={handleSearch} handleSubmit={handleSubmit} />
     </div>
   );
 };
