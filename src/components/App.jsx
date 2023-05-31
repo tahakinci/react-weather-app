@@ -3,9 +3,9 @@ import SearchParams from "./SearchParams";
 
 const App = () => {
   return (
-    <>
+    <div className="bg-black-primary mx-10 w-[100%] rounded-[2rem] px-10 py-5 text-white">
       <SearchParams />
-    </>
+    </div>
   );
 };
 

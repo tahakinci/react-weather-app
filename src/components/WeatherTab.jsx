@@ -1,36 +1,17 @@
 import { useState, useEffect } from "react";
-import TodayForecast from "./TodayForecast";
-import WeeklyForecast from "./WeeklyForecast";
-import Charts from "./Charts";
-import iconObj from "./iconobj";
 import CitiesAndMap from "./CitiesAndMap";
+import Forecast from "./Forecast";
+import Charts from "./Charts";
 
 const WeatherTab = ({ cityData, weatherData = [], otherCitiesData }) => {
+  const [citiesWeather, setCitiesWeather] = useState([]);
   const [today, setToday] = useState([]);
   const [otherDays, setOtherdayS] = useState([]);
-  const [citiesWeather, setCitiesWeather] = useState([]);
   const API_KEY = import.meta.env.REACT_APP_API_KEY;
+
   useEffect(() => {
     setDays(convertData());
   }, [cityData]);
-
-  useEffect(() => {
-    getWeatherData();
-  }, [otherCitiesData]);
-
-  async function getWeatherData() {
-    const arr = [];
-    if (otherCitiesData) {
-      for (const cities of otherCitiesData) {
-        const { name } = cities;
-        const url = `http://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${API_KEY}&units=metric`;
-        const response = await fetch(url);
-        const data = await response.json();
-        arr.push(data);
-      }
-      setCitiesWeather(arr);
-    }
-  }
 
   function convertData() {
     const separatedDays = {};
@@ -58,11 +39,14 @@ const WeatherTab = ({ cityData, weatherData = [], otherCitiesData }) => {
       // İlk günün eksiklerini 2. günün ilk indexleriyle, son günü ise sondan bir önceki günün son indexleriyle tamamlıyorum
       if (index === 0) {
         if (item.length < 8) {
+          // 8 den azsa sonraki günden tamamla
           todayArr.push(...item);
-
           for (let i = 0; i < data[index + 1].length - item.length; i++) {
             todayArr.push(data[index + 1][i]);
           }
+        } else {
+          // 8 ise tüm datayı at
+          todayArr.push(...item);
         }
       } else {
         otherDaysArr.push(item);
@@ -79,38 +63,28 @@ const WeatherTab = ({ cityData, weatherData = [], otherCitiesData }) => {
     setOtherdayS(otherDaysArr);
   }
 
+  useEffect(() => {
+    getWeatherData();
+  }, [otherCitiesData]);
+
+  async function getWeatherData() {
+    const arr = [];
+    if (otherCitiesData) {
+      for (const cities of otherCitiesData) {
+        const { name } = cities;
+        const url = `http://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${API_KEY}&units=metric`;
+        const response = await fetch(url);
+        const data = await response.json();
+        arr.push(data);
+      }
+      setCitiesWeather(arr);
+    }
+  }
+
   return (
-    <main className="main-content">
-      <section className="weather-section">
-        <div className="weather-header">
-          <div className="left fs-600">
-            <div className="padding-right-500 inline text-neutral-500">
-              Today
-            </div>
-            <div className="padding-right-500 inline text-neutral-500">
-              Tomorrow
-            </div>
-            <div className="padding-right-500 inline">Next 5 days</div>
-          </div>
-          <div className="weather-button right">
-            <button className="text-dark-dm">Forecast</button>
-            <button className="text-neutral-500">Air quality</button>
-          </div>
-        </div>
-        <div className="forecast-container">
-          <TodayForecast data={today} icon={iconObj} />
-          {otherDays
-            ? otherDays.map((day) => (
-                <WeeklyForecast
-                  data={day}
-                  icon={iconObj[day[4].weather[0].icon]}
-                  key={day.at(Math.floor(day.length / 2)).dt}
-                />
-              ))
-            : null}
-        </div>
-      </section>
-      <section className="chart-section">
+    <main className="grid grid-cols-1 gap-6 pt-6 md:grid-cols-[3fr_1fr]">
+      <Forecast today={today} otherDays={otherDays} />
+      <section>
         <h3>Chance of rain</h3>
         <Charts today={today} />
       </section>

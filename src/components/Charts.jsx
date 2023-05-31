@@ -17,31 +17,20 @@ const Charts = ({ today }) => {
   });
 
   return (
-    <div className="chart">
-      <div className="chartY">
-        <p>100%</p>
-        <p>50%</p>
-        <p>0%</p>
-      </div>
-      <div className="bar-container">
-        {predictionArr.map((day, index) => {
-          return (
-            <div className="chart-bar">
-              <div className="bar">
-                <div
-                  className="rain-bar"
-                  style={{ height: day + "%" }}
-                  key={index}
-                ></div>
-              </div>
+    <div>
+      <div>
+        {predictionArr.map((day, index) => (
+          <div key={index}>
+            <div>
+              <div style={{ height: day + "%" }}></div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
-      <div className="chartX">
-        {hours.map((hour) => {
-          return <div key={hour}>{hour}</div>;
-        })}
+      <div>
+        {hours.map((hour) => (
+          <div key={hour}>{hour}</div>
+        ))}
       </div>
     </div>
   );

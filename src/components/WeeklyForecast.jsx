@@ -10,10 +10,8 @@ const WeeklyForecast = ({ data, icon }) => {
   };
 
   return (
-    <div className="forecast-screen-sm bg-primary-400-dm">
-      <div className="fw-regular">
-        {dayObj[new Date(data[0].dt_txt).getDay()]}
-      </div>
+    <div className="flex grow flex-col items-center justify-around gap-4 rounded-3xl bg-[#1f1f1f]">
+      <div>{dayObj[new Date(data[0].dt_txt).getDay()]}</div>
       <img src={icon} />
       <div>{Math.round(data[0].main.temp)} °C</div>
     </div>

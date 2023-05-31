@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import WeatherTab from "./WeatherTab";
 import Navigation from "./Navigation";
+import SearchButton from "./SearchButton";
 
 const SearchParams = () => {
   const [search, setSearch] = useState("");
   const [weatherData, setWeatherData] = useState([]);
+  const [date, setDate] = useState("");
   const [cities, setCities] = useState([]);
   const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
@@ -38,6 +40,7 @@ const SearchParams = () => {
     );
     const json = await res.json();
     setWeatherData(json);
+    setDate(json.list[0].dt);
   }
 
   const handleSearch = (value) => {
@@ -47,11 +50,12 @@ const SearchParams = () => {
     fetchWeatherData();
   };
   return (
-    <div className="container bg-primary-500-dm">
+    <div className="">
       <Navigation
         setSearch={handleSearch}
         handleSubmit={handleSubmit}
         city={weatherData.city}
+        date={date}
       />
       {weatherData ? (
         <WeatherTab
