@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CitiesAndMap from "./CitiesAndMap";
 import Forecast from "./Forecast";
 import Charts from "./Charts";
+import SearchButton from "./SearchButton";
 
 const WeatherTab = ({ cityData, weatherData = [], otherCitiesData }) => {
   const [citiesWeather, setCitiesWeather] = useState([]);
@@ -93,6 +94,7 @@ const WeatherTab = ({ cityData, weatherData = [], otherCitiesData }) => {
         cityData={cityData}
         weather={citiesWeather}
       />
+      <SearchButton />
     </main>
   );
 };
